@@ -1,11 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resultado de Consulta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifa</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
+<header>
+    <div class="menu"> 
+        <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="{% url 'consultar_tarifa' %}">Consultar Tarifas</a></li>
+            </ul>
+        </nav>
+   </div> 
+</header>
 <body>
-    <h2>Resultado de Consulta</h2>
-    <p>{{ resultado }}</p>
-    <a href="{% url 'consultar_tarifa' %}">Consultar otra tarifa</a>
+    <h2>Vehiculo Encontrado</h2>
+    <div class="resulconsulta">
+    {{ resultado|safe }}
+    </div>
 </body>
 </html>

@@ -1,14 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Formulario de Consulta</title>
+    <title>Consultar Tarifas</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
 </head>
+<header>
+    <div class="menu"> 
+        <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="{% url 'consultar_tarifa' %}">Consultar Tarifas</a></li>
+            </ul>
+        </nav>
+   </div> 
+</header>
 <body>
-    <h2>Formulario de Consulta</h2>
+    <h2>Consultar Tarifas de RTO</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Enviar</button>
+        <button type="submit">Consultar</button>
     </form>
 </body>
+<footer>
+    <p>Desarrollado por Equipo 4</a></p>
+    <img src="{% static 'img/seguridad.png' %}" alt="Logo Seguridad Vial" class="logoSeguridad">
+    <img src="{% static 'img/ministerio.png' %}" alt="Logo Ministerio del Interior" class="logoMinisterio">
+</footer>
 </html>

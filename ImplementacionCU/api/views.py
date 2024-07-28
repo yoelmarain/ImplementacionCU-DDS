@@ -6,24 +6,26 @@ from .models import tarifas
 from .forms import CargarVehiculoForm
 
 def consulta_tarifa(request):
+    global estado_resultado
     if request.method == 'POST':
         form = VehiculoForm(request.POST)
         if form.is_valid():
             marca = form.cleaned_data['marca']
             modelo = form.cleaned_data['modelo']
-            anio = form.cleaned_data['anio']
+            año = form.cleaned_data['año']
             tipo = form.cleaned_data['tipo']
-            vehiculo = Vehiculo.objects.filter(marca=marca, modelo=modelo, anio=anio, tipo=tipo).first()
+            vehiculo = Vehiculo.objects.filter(marca=marca, modelo=modelo, año=año, tipo=tipo).first()
             if vehiculo:
                 try:
                     tarifa = tarifas.objects.get(tarifa_id=vehiculo.tarifa_id) 
+                    estado_resultado = 'encontrado'
                     resultado = f"""
                         <div class='resultado'>
                             <div class='vehiculo'>
                             <span class='marca'>{vehiculo.marca}</span>
                             <span class='modelo'>{vehiculo.modelo}</span>
                             <span class='tipo'>{vehiculo.tipo}</span>
-                            <span class='anio'>{vehiculo.anio}</span>
+                            <span class='anio'>{vehiculo.año}</span>
                             </div>
                             <span class='tarifa'>Tarifa: ${tarifa.tarifa}</span>
                         </div>
@@ -31,8 +33,9 @@ def consulta_tarifa(request):
                 except ObjectDoesNotExist:
                     resultado = "Tarifa no encontrado"
             else:
-                resultado = "Vehiculo no disponible"
-            return render(request, 'resultado.html', {'resultado': resultado})
+                resultado = """<div class='resultado'> Lo sentimos, el vehiculo no se encuentra cargado en la base de datos </div>"""
+                estado_resultado = 'no_encontrado'
+            return render(request, 'resultado.html', {'resultado': resultado, 'estado_resultado': estado_resultado})
     else:
         form = VehiculoForm()
     return render(request, 'index.html', {'form': form})

@@ -122,7 +122,7 @@ button:hover {
     margin: 10px 0;
     font-family: 'Montserrat', sans-serif;
 }
-.resultado .marca, .resultado .modelo,  .resultado .tipo, .resultado .anio {
+.resultado .marca, .resultado .anio , .resultado .modelo , .resultado .tipo {
     display: block;
     margin: 5px 0;
     font-family: 'Montserrat', sans-serif;

@@ -1,14 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
-from .forms import VehiculoForm
-from .models import Vehiculo
-from .models import tarifas
-from .forms import CargarVehiculoForm
+from django.http import JsonResponse
+from .forms import VehiculoForm, CargarVehiculoForm
+from .models import Vehiculo, tarifas
 
 def consulta_tarifa(request):
-    global estado_resultado
     if request.method == 'POST':
-        form = VehiculoForm(request.POST)
+        marca = request.POST.get('marca')
+        modelo = request.POST.get('modelo')
+        form = VehiculoForm(request.POST, marca=marca, modelo=modelo)
         if form.is_valid():
             marca = form.cleaned_data['marca']
             modelo = form.cleaned_data['modelo']
@@ -61,3 +61,13 @@ def listar_vehiculos(request):
     vehiculos = Vehiculo.objects.all()
     return render(request, 'listar_vehiculos.html', {'vehiculos': vehiculos})
 
+def get_modelos(request):
+    marca = request.GET.get('marca')
+    modelos = Vehiculo.objects.filter(marca=marca).values_list('modelo', flat=True).distinct()
+    return JsonResponse({'modelos': list(modelos)})
+
+def get_tipos(request):
+    marca = request.GET.get('marca')
+    modelo = request.GET.get('modelo')
+    tipos = Vehiculo.objects.filter(marca=marca, modelo=modelo).values_list('tipo', flat=True).distinct()
+    return JsonResponse({'tipos': list(tipos)})

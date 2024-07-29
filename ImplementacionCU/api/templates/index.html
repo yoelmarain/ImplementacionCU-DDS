@@ -7,6 +7,50 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_marca').change(function() {
+                var marca = $(this).val();
+                $.ajax({
+                    url: '/get_modelos/',
+                    data: {
+                        'marca': marca
+                    },
+                    success: function(data) {
+                        var modelos = data.modelos;
+                        var modeloSelect = $('#id_modelo');
+                        modeloSelect.empty();
+                        modeloSelect.append('<option value="">Seleccione un modelo</option>');
+                        for (var i = 0; i < modelos.length; i++) {
+                            modeloSelect.append('<option value="' + modelos[i] + '">' + modelos[i] + '</option>');
+                        }
+                    }
+                });
+            });
+        
+            $('#id_modelo').change(function() {
+                var marca = $('#id_marca').val();
+                var modelo = $(this).val();
+                $.ajax({
+                    url: '/get_tipos/',
+                    data: {
+                        'marca': marca,
+                        'modelo': modelo
+                    },
+                    success: function(data) {
+                        var tipos = data.tipos;
+                        var tipoSelect = $('#id_tipo');
+                        tipoSelect.empty();
+                        tipoSelect.append('<option value="">Seleccione un tipo</option>');
+                        for (var i = 0; i < tipos.length; i++) {
+                            tipoSelect.append('<option value="' + tipos[i] + '">' + tipos[i] + '</option>');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <header>
     <div class="menu"> 
@@ -22,8 +66,8 @@
     <h2>Consultar Tarifas de RTO</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Consultar</button>
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Consultar</button>
     </form>
 </body>
 <footer>

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Tarifa:</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Categoria</th>
+        <th>Frecuencia</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{vehiculo.marca}}</td>
+            <td>{{vehiculo.modelo}}</td>
+            <td>{{tarifa.categoria}}</td>
+            <td>{{tarifa.frecuencia}}</td>
+            <td>${{tarifa.precio}}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

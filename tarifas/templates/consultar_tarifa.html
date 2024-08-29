@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Consultar tarifas</h1>
+
+{% if error %}
+    <p style="color: red">{{error}}</p>
+{% endif %}
+
+
+<form action="/ver/" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="marca" class="form-label">Marca: </label>
+      <select id="marca-select" class="form-select" name="marca">
+        {% if marcas %}
+        <option value="">Seleccione una marca</option>
+        {% for marca in marcas %}
+        <option value="{{marca.marca}}">{{marca.marca}}</option>
+        {% endfor %}
+        {% endif %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="modelo" class="form-label">Modelo: </label>
+      <select id="modelo-select" class="form-select" name="modelo">
+        <option value="">Seleccione un modelo</option>
+    </select>
+    </div>
+    <button type="submit" class="btn btn-secondary" value="Consultar">Buscar</button>
+  </form>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $("#marca-select").change(function(){
+          var url = "{% url 'load_modelos' %}";
+          var marca = $(this).val();
+          $.ajax({
+              url: url,
+              data: {
+                  'marca': marca
+              },
+              success: function(data){
+                  $("#modelo-select").html('');
+                  $("#modelo-select").append('<option value="">Seleccione un modelo</option>');
+                  for (var i = 0; i < data.length; i++) {
+                      $("#modelo-select").append('<option value="' + data[i].modelo + '">' + data[i].modelo + '</option>');
+                  }
+              }
+          });
+      });
+  });
+</script>
+
+
+{% endblock %}

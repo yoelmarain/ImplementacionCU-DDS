@@ -9,18 +9,26 @@
     <title>RTO</title>
 </head>
 <body>
-    <nav>
-        <ul class="nav nav-tabs justify-content-center">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/consultar">Consultar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/verTodasTarifas">Tarifas</a>
-            </li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">RTO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav justify-content-center w-100">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/consultar/' %}active{% endif %}" href="/consultar">Consultar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/verTodasTarifas/' %}active{% endif %}" href="/verTodasTarifas">Tarifas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
     <div class="container">
     {% block content %}

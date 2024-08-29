@@ -1,5 +1,7 @@
 # ImplementacionCU-DDS
 
+[DjangoDocs]: https://www.djangoproject.com/
+[PythonDocs]: https://www.python.org/doc/
 
 This section is used for setting up the backend [Django][DjangoDocs] server, using [Python][PythonDocs].
 

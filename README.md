@@ -2,8 +2,10 @@
 
 [DjangoDocs]: https://www.djangoproject.com/
 [PythonDocs]: https://www.python.org/doc/
+[BootstrapPage]: https://getbootstrap.com 
 
-This section is used for setting up the backend [Django][DjangoDocs] server, using [Python][PythonDocs].
+
+This section is used for setting up the backend [Django][DjangoDocs] server, using [Python][PythonDocs]. Frontend using HTML, CSS and [Bootstrap][BootstrapPage].
 
 
 #### Setting up the backend for Development

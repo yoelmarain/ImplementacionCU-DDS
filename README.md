@@ -8,7 +8,7 @@
 This section is used for setting up the backend [Django][DjangoDocs] server, using [Python][PythonDocs]. Frontend using HTML, CSS and [Bootstrap][BootstrapPage].
 
 
-#### Setting up the backend for Development
+#### Setting up the project
 
 - Tools needed:
   - Shell (bash, zsh, PowerShell, etc.)
